@@ -1,9 +1,10 @@
 package com.lkwoung.hellospring.repository;
 
 import com.lkwoung.hellospring.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
-
+//@Repository
 public class MemoryMemberRepository implements MemberRepository {
     private static Map<Long, Member> store = new HashMap<>(); // 해시맵 자료구조에 객체 저장 (메모리에), 실무에서는 concurrentHashmap을 사용
     private static long sequence = 0L; // 동시성 문제를 고려하여 atom long을 해야하지만 예제이므로 넘어감

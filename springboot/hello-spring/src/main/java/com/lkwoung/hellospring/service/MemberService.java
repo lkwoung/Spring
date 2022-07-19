@@ -3,13 +3,16 @@ package com.lkwoung.hellospring.service;
 import com.lkwoung.hellospring.domain.Member;
 import com.lkwoung.hellospring.repository.MemberRepository;
 import com.lkwoung.hellospring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+//@Service
 public class MemberService {
     private final MemberRepository memberRepository;
 
+    //@Autowired
     public MemberService(MemberRepository memberRepository){
         // 이렇게 직접 메모리레포지토리를 생성하지 않고 외부에서 넣어주는 방식을 DI라고 한다.
         this.memberRepository = memberRepository;
