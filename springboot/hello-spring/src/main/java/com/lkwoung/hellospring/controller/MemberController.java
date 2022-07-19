@@ -1,8 +1,14 @@
 package com.lkwoung.hellospring.controller;
 
+import com.lkwoung.hellospring.domain.Member;
 import com.lkwoung.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller // spring 컨테이너가 @Controller을 보고 MemberController객체를 생성하고 컨테이너에 넣어 관리해준다.
 // spring 컨테이너에서 spring bean이 관리된다라고 표현
@@ -18,6 +24,29 @@ public class MemberController {
     // 의존성 주입 DI
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
+    }
+
+    // 같은 url로 get, post에 따라 다르게 매핑할 수 있다.
+    @GetMapping("/members/new") // url get방식을 통해 들어오기 때문에 이 함수가 먼저 실행이되고
+    public String createForm(){
+        return "members/createMemberForm";
+    }
+
+    @PostMapping("/members/new") // 입력된 문자를 post(데이터를 form같은 곳에 넣어서 전달)형식으로 보내 이 함수가 실행이된다.
+    public String create(MemberForm form) {
+        Member member = new Member();
+        member.setName(form.getName());
+
+        memberService.join(member);
+
+        return "redirect:/"; // 홈 화면으로 이동
+    }
+
+    @GetMapping("/members")
+    public String list(Model model){
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members); // 모든 맴버가 담긴 리스트를 그대로 모델에 담아서 템플릿(뷰)에 넘김
+        return "members/memberList";
     }
 }
 
