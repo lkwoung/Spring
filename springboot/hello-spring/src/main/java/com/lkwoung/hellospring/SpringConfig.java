@@ -59,6 +59,7 @@ public class SpringConfig {
     }
 
     /**    // AOP는 가시적으로 보이게 java로 등록해주는 것이 좋다.
+    *      // 여기서는 component로 등록하여 사용 
     *  @Bean
     *  public TimeTraceAop timeTraceAop(){
     *      return new TimeTraceAop();
