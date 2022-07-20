@@ -1,5 +1,6 @@
 package com.lkwoung.hellospring;
 
+import com.lkwoung.hellospring.aop.TimeTraceAop;
 import com.lkwoung.hellospring.repository.*;
 import com.lkwoung.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,13 @@ public class SpringConfig {
         //
     }
 
+    /**    // AOP는 가시적으로 보이게 java로 등록해주는 것이 좋다.
+    *  @Bean
+    *  public TimeTraceAop timeTraceAop(){
+    *      return new TimeTraceAop();
+    *  }
+    **/
+
     /**
      * @Bean
      *     public MemberRepository memberRepository() {
@@ -82,3 +90,5 @@ public class SpringConfig {
     // 실무에서는 정형화된 컨트롤러, 서비스, 리포지토리 같은 코드는 컴포넌트 스캔을 사용
     // 정형화되지 않거나,상황에 따라 구현 클래스를 변경해야 하면 설정을 통해 스프링 빈으로 등록 -> 나중에 변경이 필요할 때 유리함
 }
+
+
